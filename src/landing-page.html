@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================= -->
+    <!-- ALTERAR AQUI: Título da aba do navegador (SEO) -->
+    <!-- ============================================= -->
+    <title>Nome do Seu Negócio | Slogan curto e direto</title>
+
+    <!-- ALTERAR AQUI: Descrição para Google e redes sociais (máx 160 caracteres) -->
+    <meta name="description" content="Descreva aqui o que o seu comércio oferece em até 160 caracteres. Use palavras-chave que seus clientes buscam.">
+
+    <!-- ALTERAR AQUI: Favicon do site (ícone da aba) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fontes: Fraunces (títulos) + Manrope (texto). Importadas do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           PALETA DE CORES E VARIÁVEIS GLOBAIS
+           ALTERAR AQUI: Troque os valores para personalizar a marca
+           ========================================================= */
+        :root {
+            --cor-primaria: #1a3a3a;        /* ALTERAR AQUI: Cor principal da marca (verde escuro) */
+            --cor-primaria-clara: #2d5a5a;  /* ALTERAR AQUI: Versão mais clara da cor principal */
+            --cor-acento: #d97706;          /* ALTERAR AQUI: Cor de destaque dos botões CTA (âmbar) */
+            --cor-acento-hover: #b45309;    /* ALTERAR AQUI: Cor do botão ao passar o mouse */
+            --cor-whatsapp: #25D366;        /* ALTERAR AQUI: Cor do botão flutuante do WhatsApp */
+            --cor-fundo: #fdfbf7;           /* ALTERAR AQUI: Cor de fundo geral (creme) */
+            --cor-fundo-secao: #f5f0e6;     /* ALTERAR AQUI: Cor de fundo de seções alternadas */
+            --cor-texto: #1a1a1a;           /* ALTERAR AQUI: Cor do texto principal */
+            --cor-texto-suave: #5a5a5a;     /* ALTERAR AQUI: Cor do texto secundário */
+            --cor-borda: #e8e2d4;           /* ALTERAR AQUI: Cor das bordas e divisores */
+
+            /* Tipografia (não é necessário alterar, mas pode trocar as fontes no <link> acima) */
+            --fonte-titulo: 'Fraunces', Georgia, serif;
+            --fonte-texto: 'Manrope', system-ui, sans-serif;
+
+            /* Espaçamentos e sombras (normalmente não precisa alterar) */
+            --raio: 12px;
+            --sombra-suave: 0 4px 20px rgba(26, 58, 58, 0.08);
+            --sombra-forte: 0 10px 40px rgba(26, 58, 58, 0.15);
+            --transicao: 0.3s ease;
+        }
+
+        /* Reset básico para consistência entre navegadores */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fonte-texto);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Container padrão centralizado (largura máxima do conteúdo) */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================
+           BOTÕES (reutilizados em toda a página)
+           ========================================== */
+        .botao {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--fonte-texto);
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--raio);
+            cursor: pointer;
+            transition: all var(--transicao);
+            text-align: center;
+        }
+
+        .botao-primario {
+            background-color: var(--cor-acento);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+        }
+
+        .botao-primario:hover {
+            background-color: var(--cor-acento-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+        }
+
+        .botao-secundario {
+            background-color: transparent;
+            color: var(--cor-primaria);
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .botao-secundario:hover {
+            background-color: var(--cor-primaria);
+            color: #fff;
+        }
+
+        /* ==========================================
+           HEADER (Cabeçalho fixo no topo)
+           ========================================== */
+        .header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--cor-borda);
+            z-index: 100;
+            transition: all var(--transicao);
+        }
+
+        .header-conteudo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        /* ALTERAR AQUI: Estilo da logo (pode trocar por uma imagem <img src="logo.png">) */
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--cor-acento);
+        }
+
+        .header .botao {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        /* ==========================================
+           HERO SECTION (Primeira dobra - conversão)
+           ========================================== */
+        .hero {
+            position: relative;
+            padding: 60px 0 80px;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--cor-fundo) 0%, var(--cor-fundo-secao) 100%);
+        }
+
+        /* Elemento decorativo de fundo (círculo colorido suave) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-conteudo {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Selo/tag acima do título (opcional, mas aumenta conversão) */
+        .hero-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: rgba(217, 119, 6, 0.1);
+            color: var(--cor-acento);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(2rem, 6vw, 3.75rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        /* Palavra de destaque dentro do título principal */
+        .hero h1 em {
+            font-style: italic;
+            color: var(--cor-acento);
+            font-weight: 500;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--cor-texto-suave);
+            margin-bottom: 36px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-botoes {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Indicadores de confiança abaixo do CTA (ex: "+500 clientes") */
+        .hero-confianca {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--cor-texto-suave);
+        }
+
+        .hero-confianca-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-confianca-item svg {
+            color: var(--cor-acento);
+        }
+
+        /* ==========================================
+           SEÇÃO DE BENEFÍCIOS / SERVIÇOS
+           ========================================== */
+        .beneficios {
+            padding: 80px 0;
+            background-color: var(--cor-fundo);
+        }
+
+        .secao-titulo {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .secao-titulo h2 {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--cor-primaria);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .secao-titulo p {
+            font-size: 1.05rem;
+            color: var(--cor-texto-suave);
+        }
+
+        /* Grid de cards (responsivo automático) */
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .beneficio-card {
+            background-color: #fff;
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio);
+            padding: 32px 28px;
+            transition: all var(--transicao);
+        }
+
+        .beneficio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-forte);
+            border-color: var(--cor-acento);
+        }
+
+        /* Ícone do card (círculo colorido com SVG dentro) */
+        .beneficio-icone {
+            width: 56px;
+            height: 56px;
+            background-color: rgba(217, 119, 6, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-acento);
+            margin-bottom: 20px;
+        }
+
+        .beneficio-card h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+        }
+
+        .beneficio-card p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           SEÇÃO DE PROVA SOCIAL (Depoimentos)
+           ========================================== */
+        .depoimentos {
+            padding: 80px 0;
+            background-color: var(--cor-primaria);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .depoimentos::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(217, 119, 6, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .depoimentos .secao-titulo h2 {
+            color: #fff;
+        }
+
+        .depoimentos .secao-titulo p {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .depoimento-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--raio);
+            padding: 32px 28px;
+            backdrop-filter: blur(10px);
+            transition: all var(--transicao);
+        }
+
+        .depoimento-card:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        /* Estrelas de avaliação (cor âmbar) */
+        .estrelas {
+            color: var(--cor-acento);
+            margin-bottom: 16px;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .depoimento-texto {
+            font-family: var(--fonte-titulo);
+            font-size: 1.05rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .depoimento-autor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Avatar (iniciais) — ALTERAR AQUI: Pode substituir por <img> real */
+        .depoimento-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cor-acento) 0%, var(--cor-acento-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .depoimento-nome {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .depoimento-cargo {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ==========================================
+           SEÇÃO CTA FINAL (Chamada extra para ação)
+           ========================================== */
+        .cta-final {
+            padding: 80px 0;
+            background-color: var(--cor-fundo-secao);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--cor-primaria);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-final p {
+            font-size: 1.1rem;
+            color: var(--cor-texto-suave);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==========================================
+           FOOTER (Rodapé)
+           ========================================== */
+        .footer {
+            background-color: var(--cor-primaria);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-coluna h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-coluna p,
+        .footer-coluna a {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            transition: color var(--transicao);
+        }
+
+        .footer-coluna a:hover {
+            color: var(--cor-acento);
+        }
+
+        .footer-coluna ul {
+            list-style: none;
+        }
+
+        /* Ícones de redes sociais */
+        .redes-sociais {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .redes-sociais a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transicao);
+        }
+
+        .redes-sociais a:hover {
+            background-color: var(--cor-acento);
+            transform: translateY(-2px);
+        }
+
+        .redes-sociais svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Linha divisória e assinatura centralizada */
+        .footer-final {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-assinatura {
+            margin-top: 8px;
+            font-family: var(--fonte-titulo);
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ==========================================
+           BOTÃO FLUTUANTE DO WHATSAPP
+           ========================================== */
+        .whatsapp-flutuante {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--cor-whatsapp);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+            z-index: 999;
+            transition: all var(--transicao);
+            animation: pulsar 2s infinite;
+        }
+
+        .whatsapp-flutuante:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-flutuante svg {
+            width: 32px;
+            height: 32px;
+            color: #fff;
+        }
+
+        /* Animação de pulso para chamar atenção */
+        @keyframes pulsar {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45), 0 0 0 0 rgba(37, 211, 102, 0.5);
+            }
+            50% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45), 0 0 0 12px rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Animação de entrada dos elementos ao rolar a página */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           RESPONSIVIDADE (Tablet e Desktop)
+           Mobile-first: o padrão acima é para celular
+           Aqui adicionamos melhorias para telas maiores
+           ========================================== */
+
+        /* Tablet (a partir de 640px) */
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 32px;
+            }
+
+            .beneficios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .depoimentos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .whatsapp-flutuante {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        /* Desktop (a partir de 1024px) */
+        @media (min-width: 1024px) {
+            .hero {
+                padding: 100px 0 120px;
+            }
+
+            .beneficios,
+            .depoimentos,
+            .cta-final {
+                padding: 100px 0;
+            }
+
+            .beneficios-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .depoimentos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================= -->
+    <!-- HEADER (Cabeçalho)                            -->
+    <!-- ============================================= -->
+    <header class="header">
+        <div class="container header-conteudo">
+            <!-- ALTERAR AQUI: Texto/imagem da logo. Para usar imagem: <img src="logo.png" alt="Sua Marca"> -->
+            <a href="#" class="logo">
+                Sua<span>Marca</span>
+            </a>
+
+            <!-- ALTERAR AQUI: Link do botão (troque o href pelo seu WhatsApp ou telefone) -->
+            <a href="#contato" class="botao botao-primario">
+                Fale Conosco
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- HERO SECTION (Primeira dobra)                 -->
+    <!-- ============================================= -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-conteudo fade-in">
+
+                <!-- ALTERAR AQUI: Texto do selo superior (ex: "Novo", "Promoção", "Atendimento em [Sua Cidade]") -->
+                <span class="hero-tag">Atendimento em Sua Cidade</span>
+
+                <!-- ALTERAR AQUI: Título principal (máximo impacto - foque no benefício do cliente) -->
+                <h1>
+                    Transforme sua rotina com <em>soluções</em> feitas para você
+                </h1>
+
+                <!-- ALTERAR AQUI: Subtítulo (explique em 1-2 linhas o que você oferece e para quem) -->
+                <p>
+                    Qualidade, atendimento personalizado e resultados que você pode confiar.
+                    Mais de [XX] anos transformando a vida dos nossos clientes.
+                </p>
+
+                <div class="hero-botoes">
+                    <!-- ALTERAR AQUI: Link principal (leve para o WhatsApp ou formulário) -->
+                    <a href="#contato" class="botao botao-primario">
+                        Quero um Orçamento Grátis
+                    </a>
+                    <!-- ALTERAR AQUI: Link secundário (ancora para serviços ou sobre) -->
+                    <a href="#beneficios" class="botao botao-secundario">
+                        Conheça Mais
+                    </a>
+                </div>
+
+                <!-- Indicadores de confiança (opcional, mas aumenta credibilidade) -->
+                <div class="hero-confianca">
+                    <!-- ALTERAR AQUI: Primeiro indicador (ex: avaliação, quantidade de clientes) -->
+                    <div class="hero-confianca-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4L2 9.4h7.6z"/>
+                        </svg>
+                        <span>Nota 4.9 no Google</span>
+                    </div>
+                    <!-- ALTERAR AQUI: Segundo indicador -->
+                    <div class="hero-confianca-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>+500 clientes atendidos</span>
+                    </div>
+                    <!-- ALTERAR AQUI: Terceiro indicador -->
+                    <div class="hero-confianca-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Atendimento rápido</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SEÇÃO DE BENEFÍCIOS / SERVIÇOS                -->
+    <!-- ============================================= -->
+    <section class="beneficios" id="beneficios">
+        <div class="container">
+            <div class="secao-titulo fade-in">
+                <!-- ALTERAR AQUI: Título da seção de benefícios -->
+                <h2>Por que escolher a gente?</h2>
+                <!-- ALTERAR AQUI: Subtítulo explicativo -->
+                <p>Tudo o que oferecemos é pensado para resolver o seu problema de forma simples e com qualidade.</p>
+            </div>
+
+            <div class="beneficios-grid">
+
+                <!-- CARD 1 -->
+                <div class="beneficio-card fade-in">
+                    <!-- ALTERAR AQUI: Ícone do benefício (troque o SVG ou use uma imagem <img src="icone.png">) -->
+                    <div class="beneficio-icone">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <!-- ALTERAR AQUI: Título do benefício 1 -->
+                    <h3>Atendimento Personalizado</h3>
+                    <!-- ALTERAR AQUI: Descrição do benefício 1 -->
+                    <p>Cada cliente é único. Cuidamos de cada detalhe para oferecer a melhor experiência, do início ao fim.</p>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="beneficio-card fade-in">
+                    <!-- ALTERAR AQUI: Ícone do benefício 2 -->
+                    <div class="beneficio-icone">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <!-- ALTERAR AQUI: Título do benefício 2 -->
+                    <h3>Qualidade Garantida</h3>
+                    <!-- ALTERAR AQUI: Descrição do benefício 2 -->
+                    <p>Trabalhamos com os melhores materiais e profissionais do mercado para entregar resultados que realmente importam.</p>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="beneficio-card fade-in">
+                    <!-- ALTERAR AQUI: Ícone do benefício 3 -->
+                    <div class="beneficio-icone">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <!-- ALTERAR AQUI: Título do benefício 3 -->
+                    <h3>Agilidade no Atendimento</h3>
+                    <!-- ALTERAR AQUI: Descrição do benefício 3 -->
+                    <p>Resposta rápida pelo WhatsApp e compromisso com prazos. Seu tempo é tão valioso quanto o nosso.</p>
+                </div>
+
+                <!-- Para adicionar mais cards, copie um bloco acima e cole aqui. -->
+                <!-- Dica: 3 ou 6 cards funcionam melhor visualmente no desktop. -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- SEÇÃO DE PROVA SOCIAL (Depoimentos)           -->
+    <!-- ============================================= -->
+    <section class="depoimentos">
+        <div class="container">
+            <div class="secao-titulo fade-in">
+                <!-- ALTERAR AQUI: Título da seção de depoimentos -->
+                <h2>O que nossos clientes dizem</h2>
+                <!-- ALTERAR AQUI: Subtítulo -->
+                <p>Histórias reais de quem confiou no nosso trabalho.</p>
+            </div>
+
+            <div class="depoimentos-grid">
+
+                <!-- DEPOIMENTO 1 -->
+                <div class="depoimento-card fade-in">
+                    <div class="estrelas">★ ★ ★ ★ ★</div>
+                    <!-- ALTERAR AQUI: Texto do depoimento 1 -->
+                    <p class="depoimento-texto">
+                        "Atendimento incrível do começo ao fim. Entregaram muito além do que eu esperava. Super recomendo!"
+                    </p>
+                    <div class="depoimento-autor">
+                        <!-- ALTERAR AQUI: Iniciais do cliente (ou substitua por <img class="depoimento-avatar" src="foto.jpg">) -->
+                        <div class="depoimento-avatar">MS</div>
+                        <div>
+                            <!-- ALTERAR AQUI: Nome do cliente 1 -->
+                            <div class="depoimento-nome">Mariana Silva</div>
+                            <!-- ALTERAR AQUI: Cargo / localidade do cliente 1 -->
+                            <div class="depoimento-cargo">Cliente desde 2023</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEPOIMENTO 2 -->
+                <div class="depoimento-card fade-in">
+                    <div class="estrelas">★ ★ ★ ★ ★</div>
+                    <!-- ALTERAR AQUI: Texto do depoimento 2 -->
+                    <p class="depoimento-texto">
+                        "Profissionais sérios e de confiança. Fizeram tudo no prazo combinado e com um cuidado impressionante."
+                    </p>
+                    <div class="depoimento-autor">
+                        <!-- ALTERAR AQUI: Iniciais do cliente 2 -->
+                        <div class="depoimento-avatar">RP</div>
+                        <div>
+                            <!-- ALTERAR AQUI: Nome do cliente 2 -->
+                            <div class="depoimento-nome">Ricardo Pereira</div>
+                            <!-- ALTERAR AQUI: Cargo / localidade do cliente 2 -->
+                            <div class="depoimento-cargo">Empresário local</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEPOIMENTO 3 -->
+                <div class="depoimento-card fade-in">
+                    <div class="estrelas">★ ★ ★ ★ ★</div>
+                    <!-- ALTERAR AQUI: Texto do depoimento 3 -->
+                    <p class="depoimento-texto">
+                        "Experiência maravilhosa! O preço é justo e a qualidade do serviço é excelente. Voltarei com certeza."
+                    </p>
+                    <div class="depoimento-autor">
+                        <!-- ALTERAR AQUI: Iniciais do cliente 3 -->
+                        <div class="depoimento-avatar">JC</div>
+                        <div>
+                            <!-- ALTERAR AQUI: Nome do cliente 3 -->
+                            <div class="depoimento-nome">Juliana Costa</div>
+                            <!-- ALTERAR AQUI: Cargo / localidade do cliente 3 -->
+                            <div class="depoimento-cargo">Moradora do bairro</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- CTA FINAL (Última chamada para ação)          -->
+    <!-- ============================================= -->
+    <section class="cta-final" id="contato">
+        <div class="container fade-in">
+            <!-- ALTERAR AQUI: Título da chamada final -->
+            <h2>Pronto para começar?</h2>
+            <!-- ALTERAR AQUI: Subtítulo motivador -->
+            <p>Fale conosco agora pelo WhatsApp e receba um atendimento rápido e sem compromisso.</p>
+            <!-- ALTERAR AQUI: Link do WhatsApp (trocar o número abaixo pelo seu - formato internacional sem +, sem espaços) -->
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+               class="botao botao-primario"
+               target="_blank"
+               rel="noopener">
+                Falar no WhatsApp Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- FOOTER (Rodapé)                               -->
+    <!-- ============================================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <!-- Coluna 1: Sobre / Logo -->
+                <div class="footer-coluna">
+                    <!-- ALTERAR AQUI: Nome da marca no footer -->
+                    <h4>SuaMarca</h4>
+                    <!-- ALTERAR AQUI: Descrição curta da empresa -->
+                    <p>Há anos atendendo a nossa comunidade com qualidade, carinho e compromisso em cada entrega.</p>
+
+                    <!-- Redes Sociais -->
+                    <div class="redes-sociais">
+                        <!-- ALTERAR AQUI: Link do Instagram (trocar href) -->
+                        <a href="https://instagram.com/seu_usuario" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <!-- ALTERAR AQUI: Link do Facebook (trocar href) -->
+                        <a href="https://facebook.com/sua_pagina" target="_blank" rel="noopener" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <!-- ALTERAR AQUI: Link do WhatsApp (trocar href) -->
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Contato -->
+                <div class="footer-coluna">
+                    <h4>Contato</h4>
+                    <ul>
+                        <!-- ALTERAR AQUI: Telefone -->
+                        <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                        <!-- ALTERAR AQUI: E-mail -->
+                        <li><a href="mailto:contato@suamarca.com">contato@suamarca.com</a></li>
+                        <!-- ALTERAR AQUI: Endereço -->
+                        <li>Rua Exemplo, 123 - Bairro</li>
+                        <!-- ALTERAR AQUI: Cidade / Estado -->
+                        <li>Sua Cidade - SP</li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Horário -->
+                <div class="footer-coluna">
+                    <h4>Horário</h4>
+                    <ul>
+                        <!-- ALTERAR AQUI: Horários de funcionamento -->
+                        <li>Segunda a Sexta</li>
+                        <li>08h às 18h</li>
+                        <li>Sábado</li>
+                        <li>09h às 14h</li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Links rápidos -->
+                <div class="footer-coluna">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <!-- ALTERAR AQUI: Links de navegação (se adicionar mais seções) -->
+                        <li><a href="#beneficios">Serviços</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Linha final com copyright e assinatura OBRIGATÓRIA -->
+            <div class="footer-final">
+                <!-- ALTERAR AQUI: Ano e nome da marca no copyright -->
+                <p>© 2025 SuaMarca. Todos os direitos reservados.</p>
+                <!-- IMPORTANTE: NÃO REMOVER — Assinatura obrigatória centralizada -->
+                <p class="footer-assinatura">Desenvolvido por Court</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================= -->
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP                   -->
+    <!-- ALTERAR AQUI: Trocar o número (formato 55 + DDD + número, sem espaços) -->
+    <!-- ALTERAR AQUI: Trocar o texto pré-preenchido (deve estar codificado em URL) -->
+    <!-- ============================================= -->
+    <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+       class="whatsapp-flutuante"
+       target="_blank"
+       rel="noopener"
+       aria-label="Fale conosco no WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/>
+        </svg>
+    </a>
+
+    <!-- ============================================= -->
+    <!-- JAVASCRIPT                                    -->
+    <!-- ============================================= -->
+    <script>
+        /**
+         * Animação suave de entrada dos elementos ao rolar a página.
+         * Usa Intersection Observer (API nativa, sem bibliotecas externas).
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Observa os elementos com a classe .fade-in
+            const elementosAnimados = document.querySelectorAll('.fade-in');
+
+            const observador = new IntersectionObserver(function(entradas) {
+                entradas.forEach(function(entrada) {
+                    if (entrada.isIntersecting) {
+                        entrada.target.classList.add('visivel');
+                        // Para de observar depois que apareceu (melhor performance)
+                        observador.unobserve(entrada.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,       // Dispara quando 10% do elemento está visível
+                rootMargin: '0px 0px -50px 0px'  // Começa um pouco antes de entrar na tela
+            });
+
+            elementosAnimados.forEach(function(elemento) {
+                observador.observe(elemento);
+            });
+
+            /**
+             * Sombra no header ao rolar para baixo
+             * Melhora a separação visual entre o header e o conteúdo
+             */
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 20) {
+                    header.style.boxShadow = 'var(--sombra-suave)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            /**
+             * Rolagem suave ao clicar em links internos (#ancora)
+             * O CSS já faz isso via scroll-behavior: smooth, este JS garante
+             * compatibilidade com navegadores mais antigos.
+             */
+            document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const destino = document.querySelector(this.getAttribute('href'));
+                    if (destino) {
+                        e.preventDefault();
+                        const alturaHeader = header.offsetHeight;
+                        const posicao = destino.offsetTop - alturaHeader;
+                        window.scrollTo({
+                            top: posicao,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

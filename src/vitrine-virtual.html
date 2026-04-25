@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- ⚠️  ALTERAR AQUI: Título da loja (aparece na aba do navegador)      -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <title>Nome da Loja | Slogan curto</title>
+
+    <!-- ⚠️ ALTERAR AQUI: Descrição da loja para SEO (máx. 160 caracteres) -->
+    <meta name="description" content="Compre online com entrega rápida. A melhor seleção de produtos da sua cidade, com preços justos e atendimento próximo.">
+
+    <!-- ⚠️ ALTERAR AQUI: Favicon da loja -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fontes: Bricolage Grotesque (títulos) + DM Sans (corpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ╔═══════════════════════════════════════════════════════════════════╗
+           ║                                                                   ║
+           ║   🎨  CENTRAL DE PERSONALIZAÇÃO — CORES, FONTES E ESPAÇAMENTOS   ║
+           ║                                                                   ║
+           ║   ⚠️  Mude os valores abaixo para adaptar à identidade da loja   ║
+           ║                                                                   ║
+           ╚═══════════════════════════════════════════════════════════════════╝ */
+        :root {
+            /* ─────────── CORES DA MARCA ─────────── */
+            --cor-primaria:        #1a1a1a;   /* ⚠️ Preto grafite — texto e headers */
+            --cor-primaria-suave:  #2d2d2d;   /* ⚠️ Variante mais clara */
+            --cor-acento:          #ff4d6d;   /* ⚠️ Coral vibrante — CTAs, preços em destaque */
+            --cor-acento-escuro:   #e63950;   /* ⚠️ Coral hover dos botões */
+            --cor-acento-suave:    #fff0f3;   /* ⚠️ Coral bem suave — fundos de tag */
+
+            /* ─────────── FUNDOS ─────────── */
+            --cor-fundo:           #fafafa;   /* ⚠️ Fundo principal (off-white) */
+            --cor-fundo-card:      #ffffff;   /* ⚠️ Fundo dos cards de produto */
+            --cor-fundo-alt:       #f1f1ef;   /* ⚠️ Fundo de seções alternadas */
+
+            /* ─────────── TEXTOS ─────────── */
+            --cor-texto:           #1a1a1a;   /* ⚠️ Texto principal */
+            --cor-texto-suave:     #6b7280;   /* ⚠️ Texto secundário / descrições */
+            --cor-texto-claro:     #9ca3af;   /* ⚠️ Texto bem claro / legendas */
+            --cor-borda:           #e5e5e5;   /* ⚠️ Bordas e divisores */
+
+            /* ─────────── SISTEMA ─────────── */
+            --cor-sucesso:         #10b981;   /* ⚠️ Verde de "adicionado ao carrinho" */
+            --cor-promocao:        #ff4d6d;   /* ⚠️ Cor de preços promocionais */
+            --cor-estrela:         #fbbf24;   /* ⚠️ Amarelo das estrelas de avaliação */
+
+            /* ╔═════════════════════════════════════════════════════════════╗
+               ║  🔤  TIPOGRAFIA                                              ║
+               ║  ⚠️ Se trocar as fontes, atualize também o <link> acima     ║
+               ╚═════════════════════════════════════════════════════════════╝ */
+            --fonte-titulo: 'Bricolage Grotesque', system-ui, sans-serif;
+            --fonte-texto:  'DM Sans', system-ui, -apple-system, sans-serif;
+
+            /* ─────────── ESTRUTURA ─────────── */
+            --raio-pequeno:  8px;
+            --raio:          12px;
+            --raio-grande:   20px;
+            --sombra-card:   0 1px 3px rgba(0,0,0,0.05);
+            --sombra-hover:  0 20px 40px rgba(0,0,0,0.1);
+            --transicao:     0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --altura-header: 72px;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════
+           RESET E BASE
+           ══════════════════════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--fonte-texto);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img, svg { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════
+           BOTÕES REUTILIZÁVEIS
+           ══════════════════════════════════════════════════════════════════ */
+        .botao {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: var(--fonte-texto);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all var(--transicao);
+            white-space: nowrap;
+        }
+
+        .botao-principal {
+            background-color: var(--cor-primaria);
+            color: #fff;
+        }
+
+        .botao-principal:hover {
+            background-color: var(--cor-primaria-suave);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .botao-acento {
+            background-color: var(--cor-acento);
+            color: #fff;
+        }
+
+        .botao-acento:hover {
+            background-color: var(--cor-acento-escuro);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.35);
+        }
+
+        .botao-branco {
+            background-color: #fff;
+            color: var(--cor-primaria);
+        }
+
+        .botao-branco:hover {
+            background-color: var(--cor-fundo-alt);
+            transform: translateY(-2px);
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🏷️   BARRA SUPERIOR (anúncio rolante)                          ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .barra-anuncio {
+            background-color: var(--cor-primaria);
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .barra-anuncio span {
+            color: var(--cor-acento);
+            font-weight: 700;
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  📌  HEADER — Logo, Busca e Carrinho                             ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--cor-borda);
+            z-index: 100;
+        }
+
+        .header-conteudo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: var(--altura-header);
+        }
+
+        /* ⚠️ ALTERAR AQUI: Logo da loja (pode trocar por <img src="logo.png">) */
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--cor-primaria);
+            letter-spacing: -1px;
+            flex-shrink: 0;
+        }
+
+        .logo-ponto {
+            color: var(--cor-acento);
+        }
+
+        /* ─────── Barra de busca ─────── */
+        .busca {
+            flex: 1;
+            max-width: 560px;
+            position: relative;
+            display: none;
+        }
+
+        .busca-input {
+            width: 100%;
+            padding: 11px 16px 11px 44px;
+            font-family: inherit;
+            font-size: 14px;
+            background-color: var(--cor-fundo-alt);
+            border: 1.5px solid transparent;
+            border-radius: 100px;
+            transition: all var(--transicao);
+            color: var(--cor-texto);
+        }
+
+        .busca-input:focus {
+            outline: none;
+            background-color: #fff;
+            border-color: var(--cor-primaria);
+        }
+
+        .busca-icone {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cor-texto-suave);
+            pointer-events: none;
+        }
+
+        /* ─────── Ações do header (busca mobile + carrinho) ─────── */
+        .header-acoes {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+        }
+
+        .header-botao {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-primaria);
+            transition: background-color var(--transicao);
+        }
+
+        .header-botao:hover {
+            background-color: var(--cor-fundo-alt);
+        }
+
+        .header-botao svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Ícone de busca (só aparece no mobile) */
+        .busca-mobile-toggle {
+            display: flex;
+        }
+
+        /* ─────── Contador do carrinho ─────── */
+        .carrinho-contador {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            background-color: var(--cor-acento);
+            color: #fff;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        /* Animação quando adiciona item */
+        .carrinho-contador.pulando {
+            animation: pulsar-carrinho 0.6s ease;
+        }
+
+        @keyframes pulsar-carrinho {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.5); background-color: var(--cor-sucesso); }
+            60% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Busca expandida no mobile */
+        .busca-mobile {
+            display: none;
+            padding: 12px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .busca-mobile.aberta {
+            display: block;
+        }
+
+        .busca-mobile .busca-input {
+            width: 100%;
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🎯  HERO BANNER ROTATIVO                                         ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .hero {
+            padding: 24px 0 0;
+        }
+
+        .hero-carrossel {
+            position: relative;
+            border-radius: var(--raio-grande);
+            overflow: hidden;
+            box-shadow: var(--sombra-card);
+        }
+
+        .hero-slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-slide {
+            flex-shrink: 0;
+            width: 100%;
+            min-height: 380px;
+            padding: 48px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ⚠️ ALTERAR AQUI: Cores de fundo de cada slide. Você pode trocar por imagens usando background-image */
+        .hero-slide[data-slide="1"] {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .hero-slide[data-slide="2"] {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff8e9f 100%);
+        }
+
+        .hero-slide[data-slide="3"] {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+
+        /* Padrão decorativo nos slides */
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-slide-conteudo {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            color: #fff;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-slide h1 {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .hero-slide p {
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        /* Botões de navegação do carrossel (setas) */
+        .hero-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all var(--transicao);
+            z-index: 2;
+        }
+
+        .hero-nav:hover {
+            background-color: rgba(255,255,255,0.35);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .hero-nav.anterior { left: 16px; }
+        .hero-nav.proximo  { right: 16px; }
+
+        /* Indicadores (bolinhas) do carrossel */
+        .hero-indicadores {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .hero-indicador {
+            width: 28px;
+            height: 4px;
+            background-color: rgba(255,255,255,0.4);
+            border-radius: 100px;
+            transition: background-color var(--transicao);
+        }
+
+        .hero-indicador.ativo {
+            background-color: #fff;
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🏷️  CATEGORIAS EM DESTAQUE                                     ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .categorias {
+            padding: 72px 0 40px;
+        }
+
+        .secao-cabecalho {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .secao-cabecalho-texto h2 {
+            font-family: var(--fonte-titulo);
+            font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--cor-primaria);
+            margin-bottom: 6px;
+        }
+
+        .secao-cabecalho-texto p {
+            font-size: 0.95rem;
+            color: var(--cor-texto-suave);
+        }
+
+        .secao-cabecalho-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            display: none;
+            align-items: center;
+            gap: 6px;
+            transition: color var(--transicao);
+        }
+
+        .secao-cabecalho-link:hover {
+            color: var(--cor-acento);
+        }
+
+        /* Grid das categorias */
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .categoria-card {
+            position: relative;
+            padding: 24px 16px;
+            background-color: var(--cor-fundo-card);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio);
+            text-align: center;
+            transition: all var(--transicao);
+            overflow: hidden;
+        }
+
+        .categoria-card:hover {
+            border-color: var(--cor-primaria);
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        /* ⚠️ ALTERAR AQUI: Fundo colorido do ícone da categoria */
+        .categoria-icone {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background-color: var(--cor-acento-suave);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-acento);
+            transition: all var(--transicao);
+        }
+
+        .categoria-card:hover .categoria-icone {
+            background-color: var(--cor-primaria);
+            color: var(--cor-acento);
+            transform: scale(1.05);
+        }
+
+        .categoria-card h3 {
+            font-family: var(--fonte-texto);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            margin-bottom: 2px;
+        }
+
+        .categoria-card span {
+            font-size: 12px;
+            color: var(--cor-texto-suave);
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🛍️  VITRINE DE PRODUTOS                                         ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .produtos {
+            padding: 40px 0 80px;
+        }
+
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        /* ─────────── CARD DE PRODUTO ─────────── */
+        .produto-card {
+            position: relative;
+            background-color: var(--cor-fundo-card);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio);
+            overflow: hidden;
+            transition: all var(--transicao);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-hover);
+            border-color: transparent;
+        }
+
+        /* ⚠️ IMPORTANTE: ÁREA DA IMAGEM DO PRODUTO
+           Para trocar a imagem, substitua o conteúdo de .produto-imagem por:
+           <img src="caminho/imagem.jpg" alt="Nome do produto">
+           A altura é mantida automaticamente pelo aspect-ratio. */
+        .produto-imagem {
+            position: relative;
+            aspect-ratio: 1;
+            background-color: var(--cor-fundo-alt);
+            overflow: hidden;
+        }
+
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .produto-card:hover .produto-imagem img {
+            transform: scale(1.05);
+        }
+
+        /* Placeholder visual (gradiente colorido + ícone) */
+        .produto-imagem-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 6 variações de fundo colorido pros placeholders */
+        .bg-pastel-1 { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); color: #db2777; }
+        .bg-pastel-2 { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); color: #2563eb; }
+        .bg-pastel-3 { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #16a34a; }
+        .bg-pastel-4 { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #d97706; }
+        .bg-pastel-5 { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); color: #7c3aed; }
+        .bg-pastel-6 { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); color: #dc2626; }
+
+        .produto-imagem-placeholder svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.6;
+        }
+
+        /* Tag promocional sobre a imagem (ex: OFERTA, NOVO) */
+        .produto-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            background-color: var(--cor-primaria);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 100px;
+            z-index: 2;
+        }
+
+        .produto-tag.promocao {
+            background-color: var(--cor-acento);
+        }
+
+        /* Botão de favoritar no canto superior direito */
+        .produto-favorito {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-texto-suave);
+            transition: all var(--transicao);
+            z-index: 2;
+        }
+
+        .produto-favorito:hover {
+            color: var(--cor-acento);
+            transform: scale(1.1);
+        }
+
+        .produto-favorito.ativo {
+            color: var(--cor-acento);
+        }
+
+        .produto-favorito svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ─────── Informações do produto ─────── */
+        .produto-info {
+            padding: 14px 14px 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 8px;
+        }
+
+        .produto-categoria {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--cor-texto-claro);
+        }
+
+        .produto-nome {
+            font-family: var(--fonte-texto);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            line-height: 1.35;
+            margin: 0;
+            /* Limita a 2 linhas */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Avaliação com estrelas */
+        .produto-avaliacao {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--cor-texto-suave);
+        }
+
+        .produto-avaliacao .estrelas {
+            color: var(--cor-estrela);
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        /* Preço */
+        .produto-precos {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .produto-preco {
+            font-family: var(--fonte-titulo);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            letter-spacing: -0.5px;
+        }
+
+        .produto-preco-antigo {
+            font-size: 0.85rem;
+            color: var(--cor-texto-claro);
+            text-decoration: line-through;
+        }
+
+        /* Botão Adicionar ao Carrinho */
+        .produto-botao {
+            width: 100%;
+            padding: 10px 16px;
+            margin-top: 10px;
+            background-color: var(--cor-primaria);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all var(--transicao);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .produto-botao:hover {
+            background-color: var(--cor-acento);
+            transform: translateY(-1px);
+        }
+
+        .produto-botao svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .produto-botao:hover svg {
+            transform: rotate(-15deg);
+        }
+
+        /* Estado "adicionado com sucesso" */
+        .produto-botao.sucesso {
+            background-color: var(--cor-sucesso);
+            pointer-events: none;
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🔔  TOAST DE NOTIFICAÇÃO                                         ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            background-color: var(--cor-primaria);
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 100px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            max-width: calc(100% - 32px);
+        }
+
+        .toast.visivel {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icone {
+            width: 22px;
+            height: 22px;
+            background-color: var(--cor-sucesso);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .toast-icone svg {
+            width: 12px;
+            height: 12px;
+            color: #fff;
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  🦶  FOOTER                                                      ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+        .footer {
+            background-color: var(--cor-primaria);
+            color: rgba(255,255,255,0.75);
+            padding: 64px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-coluna h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .footer-coluna p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .footer-coluna ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-coluna a {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+            transition: color var(--transicao);
+        }
+
+        .footer-coluna a:hover {
+            color: var(--cor-acento);
+        }
+
+        /* Redes sociais */
+        .redes-sociais {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .redes-sociais a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transicao);
+        }
+
+        .redes-sociais a:hover {
+            background-color: var(--cor-acento);
+            transform: translateY(-2px);
+        }
+
+        .redes-sociais svg {
+            width: 16px;
+            height: 16px;
+            color: #fff;
+        }
+
+        /* Formas de pagamento */
+        .pagamento-titulo {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .pagamento-icones {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* ⚠️ ALTERAR AQUI: Se não aceitar alguma forma, remova o "bloco" correspondente */
+        .pagamento-icone {
+            min-width: 44px;
+            height: 28px;
+            padding: 0 8px;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fff;
+            transition: background-color var(--transicao);
+        }
+
+        .pagamento-icone:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Cores específicas de algumas bandeiras */
+        .pag-visa       { background-color: #1434CB; color: #fff; border-color: transparent; }
+        .pag-master     { background: linear-gradient(90deg, #EB001B 50%, #F79E1B 50%); color: #fff; border-color: transparent; }
+        .pag-pix        { background-color: #32BCAD; color: #fff; border-color: transparent; }
+        .pag-elo        { background-color: #000; color: #fff; border-color: transparent; }
+
+        /* Linha final do footer */
+        .footer-final {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer-copyright {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-assinatura {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-assinatura a {
+            color: var(--cor-acento);
+            font-weight: 600;
+            transition: opacity var(--transicao);
+        }
+
+        .footer-assinatura a:hover {
+            opacity: 0.8;
+        }
+
+        /* Animação de fade-in dos elementos */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ╔══════════════════════════════════════════════════════════════════╗
+           ║  📱  RESPONSIVIDADE (Mobile First)                               ║
+           ╚══════════════════════════════════════════════════════════════════╝ */
+
+        /* Tablet */
+        @media (min-width: 640px) {
+            .container { padding: 0 32px; }
+            .busca { display: block; }
+            .busca-mobile-toggle { display: none; }
+            .busca-mobile { display: none !important; }
+
+            .categorias-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+            .produtos-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+            .secao-cabecalho-link { display: inline-flex; }
+            .hero-slide { min-height: 440px; padding: 72px 60px; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-final { flex-direction: row; justify-content: space-between; }
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .categorias-grid { grid-template-columns: repeat(6, 1fr); }
+            .produtos-grid { grid-template-columns: repeat(4, 1fr); }
+            .hero-slide { min-height: 480px; }
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.3fr; }
+            .produto-info { padding: 18px 18px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🏷️  BARRA DE ANÚNCIO (opcional — pode remover se não quiser)   ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <!-- ⚠️ ALTERAR AQUI: Mensagem promocional do topo (ou remova toda a .barra-anuncio) -->
+    <div class="barra-anuncio">
+        Frete <span>GRÁTIS</span> em compras acima de R$ 99 · Retirada no mesmo dia na loja
+    </div>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  📌  HEADER                                                      ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <header class="header">
+        <div class="container header-conteudo">
+
+            <!-- ⚠️ ALTERAR AQUI: LOGO (troque o texto ou substitua por <img src="logo.png" alt="..."> ) -->
+            <a href="#" class="logo">
+                Loja<span class="logo-ponto">.</span>
+            </a>
+
+            <!-- Barra de busca (visível no desktop) -->
+            <div class="busca">
+                <svg class="busca-icone" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <!-- ⚠️ ALTERAR AQUI: Texto do placeholder da busca, se quiser mudar -->
+                <input type="search" class="busca-input" placeholder="O que você está procurando?" aria-label="Buscar produtos">
+            </div>
+
+            <!-- Ações do header -->
+            <div class="header-acoes">
+
+                <!-- Botão de busca (mobile) -->
+                <button class="header-botao busca-mobile-toggle" id="buscaMobileToggle" aria-label="Abrir busca">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+
+                <!-- Botão de conta/login (opcional — remova se não usar) -->
+                <button class="header-botao" aria-label="Minha conta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+
+                <!-- 🛒 CARRINHO — contador atualizado via JS -->
+                <button class="header-botao" id="botaoCarrinho" aria-label="Ver carrinho">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                    </svg>
+                    <span class="carrinho-contador" id="carrinhoContador">0</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Busca expandida (só no mobile, aparece quando clica no ícone) -->
+        <div class="busca-mobile" id="buscaMobile">
+            <input type="search" class="busca-input" placeholder="O que você está procurando?" aria-label="Buscar produtos">
+        </div>
+    </header>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🎯  HERO BANNER ROTATIVO (3 slides automáticos)                 ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-carrossel" id="heroCarrossel">
+
+                <div class="hero-slides" id="heroSlides">
+
+                    <!-- ┌──────────── SLIDE 1 ────────────┐ -->
+                    <div class="hero-slide" data-slide="1">
+                        <div class="hero-slide-conteudo">
+                            <!-- ⚠️ ALTERAR AQUI: Tag pequena do slide 1 -->
+                            <span class="hero-tag">Coleção Nova</span>
+                            <!-- ⚠️ ALTERAR AQUI: Título principal do slide 1 -->
+                            <h1>Novidades que você vai amar</h1>
+                            <!-- ⚠️ ALTERAR AQUI: Subtítulo do slide 1 -->
+                            <p>Produtos selecionados com carinho pra deixar seu dia a dia muito melhor.</p>
+                            <!-- ⚠️ ALTERAR AQUI: Texto e link do botão do slide 1 -->
+                            <a href="#produtos" class="botao botao-branco">Conferir Agora</a>
+                        </div>
+                    </div>
+
+                    <!-- ┌──────────── SLIDE 2 ────────────┐ -->
+                    <div class="hero-slide" data-slide="2">
+                        <div class="hero-slide-conteudo">
+                            <!-- ⚠️ ALTERAR AQUI: Tag pequena do slide 2 -->
+                            <span class="hero-tag">Ofertas da Semana</span>
+                            <!-- ⚠️ ALTERAR AQUI: Título do slide 2 -->
+                            <h1>Até 50% OFF em seleções</h1>
+                            <!-- ⚠️ ALTERAR AQUI: Subtítulo do slide 2 -->
+                            <p>Aproveite os descontos especiais. Só essa semana!</p>
+                            <!-- ⚠️ ALTERAR AQUI: Botão do slide 2 -->
+                            <a href="#produtos" class="botao botao-principal">Ver Ofertas</a>
+                        </div>
+                    </div>
+
+                    <!-- ┌──────────── SLIDE 3 ────────────┐ -->
+                    <div class="hero-slide" data-slide="3">
+                        <div class="hero-slide-conteudo">
+                            <!-- ⚠️ ALTERAR AQUI: Tag pequena do slide 3 -->
+                            <span class="hero-tag">Retire Grátis</span>
+                            <!-- ⚠️ ALTERAR AQUI: Título do slide 3 -->
+                            <h1>Compre online, retire na loja</h1>
+                            <!-- ⚠️ ALTERAR AQUI: Subtítulo do slide 3 -->
+                            <p>Sem taxa de entrega. Disponível no mesmo dia útil.</p>
+                            <!-- ⚠️ ALTERAR AQUI: Botão do slide 3 -->
+                            <a href="#categorias" class="botao botao-branco">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Setas de navegação -->
+                <button class="hero-nav anterior" id="heroAnterior" aria-label="Slide anterior">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <button class="hero-nav proximo" id="heroProximo" aria-label="Próximo slide">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+
+                <!-- Indicadores (bolinhas) -->
+                <div class="hero-indicadores" id="heroIndicadores">
+                    <button class="hero-indicador ativo" data-indice="0" aria-label="Ir para slide 1"></button>
+                    <button class="hero-indicador" data-indice="1" aria-label="Ir para slide 2"></button>
+                    <button class="hero-indicador" data-indice="2" aria-label="Ir para slide 3"></button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🏷️  CATEGORIAS EM DESTAQUE                                     ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <section class="categorias" id="categorias">
+        <div class="container">
+
+            <div class="secao-cabecalho">
+                <div class="secao-cabecalho-texto">
+                    <!-- ⚠️ ALTERAR AQUI: Título da seção de categorias -->
+                    <h2>Categorias em Destaque</h2>
+                    <!-- ⚠️ ALTERAR AQUI: Subtítulo -->
+                    <p>Encontre o que procura rapidamente</p>
+                </div>
+                <a href="#" class="secao-cabecalho-link">
+                    Ver todas
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="categorias-grid">
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 1 (nome, ícone e contagem) -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
+                        </svg>
+                    </div>
+                    <h3>Moda</h3>
+                    <span>48 produtos</span>
+                </a>
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 2 -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Eletrônicos</h3>
+                    <span>32 produtos</span>
+                </a>
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 3 -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h3>Casa</h3>
+                    <span>67 produtos</span>
+                </a>
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 4 -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                        </svg>
+                    </div>
+                    <h3>Beleza</h3>
+                    <span>25 produtos</span>
+                </a>
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 5 -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Infantil</h3>
+                    <span>19 produtos</span>
+                </a>
+
+                <!-- ⚠️ ALTERAR AQUI: Categoria 6 -->
+                <a href="#" class="categoria-card">
+                    <div class="categoria-icone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3>Ofertas</h3>
+                    <span>41 produtos</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🛍️  VITRINE DE PRODUTOS                                         ║
+         ║                                                                   ║
+         ║  📝  COMO TROCAR OS PRODUTOS:                                    ║
+         ║  Cada card segue o mesmo padrão. Para cada produto, edite:       ║
+         ║   1. A imagem: substitua o .produto-imagem-placeholder por       ║
+         ║      <img src="foto.jpg" alt="Nome">                              ║
+         ║   2. A tag (OFERTA / NOVO) — remova a div se não quiser           ║
+         ║   3. A categoria, nome, avaliação e preço                        ║
+         ║                                                                   ║
+         ║  Para adicionar mais produtos, copie um .produto-card inteiro    ║
+         ║  e cole dentro do .produtos-grid. Mantenha o atributo            ║
+         ║  data-nome para funcionar o "Adicionar ao carrinho".             ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <section class="produtos" id="produtos">
+        <div class="container">
+
+            <div class="secao-cabecalho">
+                <div class="secao-cabecalho-texto">
+                    <!-- ⚠️ ALTERAR AQUI: Título da vitrine -->
+                    <h2>Produtos em Destaque</h2>
+                    <!-- ⚠️ ALTERAR AQUI: Subtítulo -->
+                    <p>Os favoritos dos nossos clientes</p>
+                </div>
+                <a href="#" class="secao-cabecalho-link">
+                    Ver todos
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="produtos-grid">
+
+                <!-- ┌══════════════ PRODUTO 1 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 1">
+
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Coloque <img src="..." alt="..."> no lugar desse placeholder -->
+                        <div class="produto-imagem-placeholder bg-pastel-1">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+
+                        <!-- Tag: remova a div se não for promoção -->
+                        <span class="produto-tag promocao">-20%</span>
+
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Categoria do produto -->
+                        <span class="produto-categoria">Moda</span>
+                        <!-- ⚠️ ALTERAR AQUI: Nome do produto -->
+                        <h3 class="produto-nome">Camiseta Básica Algodão Premium</h3>
+
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★★</span>
+                            <!-- ⚠️ ALTERAR AQUI: Número de avaliações -->
+                            <span>(42)</span>
+                        </div>
+
+                        <div class="produto-precos">
+                            <!-- ⚠️ ALTERAR AQUI: Preço atual e preço antigo (remova .produto-preco-antigo se não for promo) -->
+                            <span class="produto-preco">R$ 79,90</span>
+                            <span class="produto-preco-antigo">R$ 99,90</span>
+                        </div>
+
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ┌══════════════ PRODUTO 2 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 2">
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Foto do produto 2 -->
+                        <div class="produto-imagem-placeholder bg-pastel-2">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <span class="produto-tag">Novo</span>
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Categoria, nome e preço do produto 2 -->
+                        <span class="produto-categoria">Eletrônicos</span>
+                        <h3 class="produto-nome">Fone de Ouvido Bluetooth Sem Fio</h3>
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★★</span>
+                            <span>(128)</span>
+                        </div>
+                        <div class="produto-precos">
+                            <span class="produto-preco">R$ 249,00</span>
+                        </div>
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ┌══════════════ PRODUTO 3 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 3">
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Foto do produto 3 -->
+                        <div class="produto-imagem-placeholder bg-pastel-3">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Produto 3 -->
+                        <span class="produto-categoria">Casa</span>
+                        <h3 class="produto-nome">Luminária de Mesa Moderna</h3>
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★☆</span>
+                            <span>(27)</span>
+                        </div>
+                        <div class="produto-precos">
+                            <span class="produto-preco">R$ 159,00</span>
+                        </div>
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ┌══════════════ PRODUTO 4 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 4">
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Foto do produto 4 -->
+                        <div class="produto-imagem-placeholder bg-pastel-4">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </div>
+                        <span class="produto-tag promocao">-15%</span>
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Produto 4 -->
+                        <span class="produto-categoria">Beleza</span>
+                        <h3 class="produto-nome">Kit Skincare Hidratação Completa</h3>
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★★</span>
+                            <span>(84)</span>
+                        </div>
+                        <div class="produto-precos">
+                            <span class="produto-preco">R$ 129,00</span>
+                            <span class="produto-preco-antigo">R$ 151,00</span>
+                        </div>
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ┌══════════════ PRODUTO 5 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 5">
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Foto do produto 5 -->
+                        <div class="produto-imagem-placeholder bg-pastel-5">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Produto 5 -->
+                        <span class="produto-categoria">Infantil</span>
+                        <h3 class="produto-nome">Brinquedo Educativo de Madeira</h3>
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★★</span>
+                            <span>(56)</span>
+                        </div>
+                        <div class="produto-precos">
+                            <span class="produto-preco">R$ 89,90</span>
+                        </div>
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ┌══════════════ PRODUTO 6 ══════════════┐ -->
+                <article class="produto-card" data-nome="Produto Exemplo 6">
+                    <div class="produto-imagem">
+                        <!-- ⚠️ SUBSTITUIR: Foto do produto 6 -->
+                        <div class="produto-imagem-placeholder bg-pastel-6">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <span class="produto-tag promocao">Oferta</span>
+                        <button class="produto-favorito" aria-label="Favoritar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="produto-info">
+                        <!-- ⚠️ ALTERAR AQUI: Produto 6 -->
+                        <span class="produto-categoria">Eletrônicos</span>
+                        <h3 class="produto-nome">Smartwatch Fitness Tracker</h3>
+                        <div class="produto-avaliacao">
+                            <span class="estrelas">★★★★☆</span>
+                            <span>(73)</span>
+                        </div>
+                        <div class="produto-precos">
+                            <span class="produto-preco">R$ 299,00</span>
+                            <span class="produto-preco-antigo">R$ 399,00</span>
+                        </div>
+                        <button class="produto-botao" aria-label="Adicionar ao carrinho">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"/>
+                                <circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                            </svg>
+                            Adicionar
+                        </button>
+                    </div>
+                </article>
+
+                <!-- 💡 Para adicionar MAIS produtos: copie um <article class="produto-card"> inteiro e cole aqui -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🔔  TOAST (notificação quando adiciona ao carrinho)             ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <div class="toast" id="toast">
+        <div class="toast-icone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+        </div>
+        <span id="toastTexto">Adicionado ao carrinho</span>
+    </div>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  🦶  FOOTER                                                      ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <footer class="footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <!-- Coluna 1: Marca + redes sociais -->
+                <div class="footer-coluna">
+                    <!-- ⚠️ ALTERAR AQUI: Nome da loja no footer -->
+                    <h4>Loja.</h4>
+                    <!-- ⚠️ ALTERAR AQUI: Descrição curta da loja -->
+                    <p>Seu comércio local com atendimento personalizado, entrega rápida e a melhor seleção de produtos.</p>
+
+                    <div class="redes-sociais">
+                        <!-- ⚠️ ALTERAR AQUI: Link do Instagram -->
+                        <a href="https://instagram.com/sua_loja" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <!-- ⚠️ ALTERAR AQUI: Link do Facebook -->
+                        <a href="https://facebook.com/sua_pagina" target="_blank" rel="noopener" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                            </svg>
+                        </a>
+                        <!-- ⚠️ ALTERAR AQUI: Link do WhatsApp -->
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.3A10 10 0 1012 2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Institucional -->
+                <div class="footer-coluna">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <!-- ⚠️ ALTERAR AQUI: Links institucionais -->
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Nossas Lojas</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Políticas -->
+                <div class="footer-coluna">
+                    <h4>Políticas da Loja</h4>
+                    <ul>
+                        <!-- ⚠️ ALTERAR AQUI: Links das políticas (cada um deve ter sua própria página) -->
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Trocas e Devoluções</a></li>
+                        <li><a href="#">Formas de Pagamento</a></li>
+                        <li><a href="#">Prazos de Entrega</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Contato + Formas de Pagamento -->
+                <div class="footer-coluna">
+                    <h4>Fale Conosco</h4>
+                    <ul>
+                        <!-- ⚠️ ALTERAR AQUI: Telefone/WhatsApp -->
+                        <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                        <!-- ⚠️ ALTERAR AQUI: E-mail -->
+                        <li><a href="mailto:contato@sualoja.com">contato@sualoja.com</a></li>
+                        <!-- ⚠️ ALTERAR AQUI: Endereço da loja física -->
+                        <li>Rua Exemplo, 123 — Centro</li>
+                        <li>Sua Cidade / UF</li>
+                    </ul>
+
+                    <!-- 💳 FORMAS DE PAGAMENTO ACEITAS -->
+                    <p class="pagamento-titulo" style="margin-top:24px;">Formas de pagamento</p>
+                    <!-- ⚠️ ALTERAR AQUI: Remova os blocos de bandeiras que você não aceita -->
+                    <div class="pagamento-icones">
+                        <div class="pagamento-icone pag-visa">VISA</div>
+                        <div class="pagamento-icone pag-master">MC</div>
+                        <div class="pagamento-icone pag-elo">ELO</div>
+                        <div class="pagamento-icone">AMEX</div>
+                        <div class="pagamento-icone pag-pix">PIX</div>
+                        <div class="pagamento-icone">BOLETO</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Linha final do footer -->
+            <div class="footer-final">
+                <!-- ⚠️ ALTERAR AQUI: Copyright (ano e nome da loja) -->
+                <span class="footer-copyright">© 2025 Sua Loja. CNPJ 00.000.000/0001-00 · Todos os direitos reservados.</span>
+
+                <!-- ╔══════════════════════════════════════════════════╗
+                     ║  🚫  ASSINATURA OBRIGATÓRIA — NÃO REMOVER        ║
+                     ╚══════════════════════════════════════════════════╝ -->
+                <span class="footer-assinatura">
+                    Desenvolvido por <a href="https://court.dev" target="_blank" rel="noopener">Court</a>
+                </span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ╔══════════════════════════════════════════════════════════════════╗
+         ║  ⚙️  JAVASCRIPT (tudo o que faz o template ganhar vida)         ║
+         ╚══════════════════════════════════════════════════════════════════╝ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            /* ═══════════════════════════════════════════════════════════════
+               1) ADICIONAR AO CARRINHO (simulação para o cliente testar)
+               ═══════════════════════════════════════════════════════════════
+               ⚠️ IMPORTANTE: Esta é apenas uma DEMONSTRAÇÃO visual.
+               Num e-commerce real, esse código deve:
+               - Salvar os produtos em um array/localStorage
+               - Guardar quantidade, preço, ID, imagem
+               - Mostrar uma página/modal de carrinho com os itens
+               - Integrar com backend e meio de pagamento */
+
+            let totalCarrinho = 0;
+            const contadorCarrinho = document.getElementById('carrinhoContador');
+            const toast             = document.getElementById('toast');
+            const toastTexto        = document.getElementById('toastTexto');
+            let toastTimeout        = null;
+
+            document.querySelectorAll('.produto-botao').forEach(function(botao) {
+                botao.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Pega o card pai e o nome do produto (do atributo data-nome)
+                    const card = botao.closest('.produto-card');
+                    const nomeProduto = card.dataset.nome || 'Produto';
+
+                    // 1) Atualiza o contador do carrinho
+                    totalCarrinho++;
+                    contadorCarrinho.textContent = totalCarrinho;
+
+                    // 2) Anima o contador (pulo + cor verde temporária)
+                    contadorCarrinho.classList.remove('pulando');
+                    void contadorCarrinho.offsetWidth; // força o reflow para reiniciar a animação
+                    contadorCarrinho.classList.add('pulando');
+
+                    // 3) Dá feedback no próprio botão
+                    const textoOriginal = botao.innerHTML;
+                    botao.classList.add('sucesso');
+                    botao.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Adicionado';
+
+                    setTimeout(function() {
+                        botao.classList.remove('sucesso');
+                        botao.innerHTML = textoOriginal;
+                    }, 1500);
+
+                    // 4) Mostra o toast de notificação
+                    mostrarToast(nomeProduto);
+                });
+            });
+
+            function mostrarToast(nomeProduto) {
+                toastTexto.textContent = nomeProduto + ' adicionado ao carrinho';
+                toast.classList.add('visivel');
+
+                // Reinicia o timer se outro item for adicionado durante a exibição
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(function() {
+                    toast.classList.remove('visivel');
+                }, 2500);
+            }
+
+            /* ═══════════════════════════════════════════════════════════════
+               2) BOTÃO DE FAVORITAR (simulação)
+               ═══════════════════════════════════════════════════════════════ */
+            document.querySelectorAll('.produto-favorito').forEach(function(botao) {
+                botao.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('ativo');
+
+                    // Troca o ícone de coração vazio para cheio
+                    const svg = this.querySelector('svg');
+                    if (this.classList.contains('ativo')) {
+                        svg.setAttribute('fill', 'currentColor');
+                    } else {
+                        svg.setAttribute('fill', 'none');
+                    }
+                });
+            });
+
+            /* ═══════════════════════════════════════════════════════════════
+               3) CARRINHO — clique no ícone (apenas alerta de demonstração)
+               ═══════════════════════════════════════════════════════════════ */
+            document.getElementById('botaoCarrinho').addEventListener('click', function() {
+                if (totalCarrinho === 0) {
+                    alert('Seu carrinho está vazio. Adicione produtos para continuar!');
+                } else {
+                    alert('Você tem ' + totalCarrinho + ' item(ns) no carrinho.\n\n💡 Aqui deve abrir uma página/modal de checkout no e-commerce real.');
+                }
+            });
+
+            /* ═══════════════════════════════════════════════════════════════
+               4) CARROSSEL DO BANNER HERO
+               ═══════════════════════════════════════════════════════════════ */
+            const slidesWrapper = document.getElementById('heroSlides');
+            const indicadores   = document.querySelectorAll('.hero-indicador');
+            const totalSlides   = document.querySelectorAll('.hero-slide').length;
+            let indiceAtual     = 0;
+            let intervalo       = null;
+
+            function mostrarSlide(indice) {
+                // Garante que o índice seja válido (volta pro início/fim se passar)
+                if (indice >= totalSlides) indice = 0;
+                if (indice < 0) indice = totalSlides - 1;
+
+                slidesWrapper.style.transform = 'translateX(-' + (indice * 100) + '%)';
+                indiceAtual = indice;
+
+                indicadores.forEach(function(ind, i) {
+                    ind.classList.toggle('ativo', i === indice);
+                });
+            }
+
+            function proximoSlide()   { mostrarSlide(indiceAtual + 1); }
+            function slideAnterior()  { mostrarSlide(indiceAtual - 1); }
+
+            function iniciarAutoRotacao() {
+                intervalo = setInterval(proximoSlide, 5000); // troca a cada 5 segundos
+            }
+
+            function pararAutoRotacao() {
+                if (intervalo) clearInterval(intervalo);
+            }
+
+            // Controles: setas
+            document.getElementById('heroProximo').addEventListener('click', function() {
+                proximoSlide();
+                pararAutoRotacao();
+                iniciarAutoRotacao();
+            });
+            document.getElementById('heroAnterior').addEventListener('click', function() {
+                slideAnterior();
+                pararAutoRotacao();
+                iniciarAutoRotacao();
+            });
+
+            // Controles: bolinhas (clique direto no slide desejado)
+            indicadores.forEach(function(ind) {
+                ind.addEventListener('click', function() {
+                    mostrarSlide(parseInt(this.dataset.indice));
+                    pararAutoRotacao();
+                    iniciarAutoRotacao();
+                });
+            });
+
+            // Pausa ao passar o mouse (UX melhor)
+            const carrossel = document.getElementById('heroCarrossel');
+            carrossel.addEventListener('mouseenter', pararAutoRotacao);
+            carrossel.addEventListener('mouseleave', iniciarAutoRotacao);
+
+            // Começa a rodar automaticamente
+            iniciarAutoRotacao();
+
+            /* ═══════════════════════════════════════════════════════════════
+               5) BUSCA MOBILE (abre/fecha campo de busca no celular)
+               ═══════════════════════════════════════════════════════════════ */
+            const buscaToggle = document.getElementById('buscaMobileToggle');
+            const buscaMobile = document.getElementById('buscaMobile');
+
+            buscaToggle.addEventListener('click', function() {
+                buscaMobile.classList.toggle('aberta');
+                if (buscaMobile.classList.contains('aberta')) {
+                    buscaMobile.querySelector('input').focus();
+                }
+            });
+
+            /* ═══════════════════════════════════════════════════════════════
+               6) BUSCA — filtra produtos em tempo real (DEMO)
+               ⚠️ Num e-commerce real, isso deveria vir do backend/banco.
+               Esta busca filtra apenas os produtos já visíveis na página.
+               ═══════════════════════════════════════════════════════════════ */
+            document.querySelectorAll('.busca-input').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    const termo = this.value.toLowerCase().trim();
+                    const produtos = document.querySelectorAll('.produto-card');
+
+                    produtos.forEach(function(produto) {
+                        const nome = produto.querySelector('.produto-nome').textContent.toLowerCase();
+                        const categoria = produto.querySelector('.produto-categoria').textContent.toLowerCase();
+
+                        if (termo === '' || nome.includes(termo) || categoria.includes(termo)) {
+                            produto.style.display = '';
+                        } else {
+                            produto.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
