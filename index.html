@@ -35,6 +35,11 @@
             <img src="images/logo-png.png" alt="Court Sites">
             <span>Court<em>Sites</em></span>
         </a>
+        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul>
             <li><a href="#modelos">Modelos</a></li>
             <li><a href="#sobre">Sobre</a></li>
@@ -42,6 +47,7 @@
             <li><a href="#contato" class="cta">Orçamento</a></li>
         </ul>
     </nav>
+    <div class="nav-backdrop"></div>
 
     <!-- HERO -->
     <section id="inicio" class="hero">
@@ -403,7 +409,51 @@
             offset: 60
         });
 
-        // FAQ accordion
+        // ===== MENU MOBILE (hambúrguer) =====
+        const navToggle = document.querySelector('.nav-toggle');
+        const navList = document.querySelector('nav.topbar ul');
+        const navBackdrop = document.querySelector('.nav-backdrop');
+
+        function closeMenu() {
+            navToggle.classList.remove('active');
+            navList.classList.remove('active');
+            navBackdrop.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Abrir menu');
+        }
+
+        function openMenu() {
+            navToggle.classList.add('active');
+            navList.classList.add('active');
+            navBackdrop.classList.add('active');
+            document.body.classList.add('nav-open');
+            navToggle.setAttribute('aria-expanded', 'true');
+            navToggle.setAttribute('aria-label', 'Fechar menu');
+        }
+
+        navToggle.addEventListener('click', () => {
+            if (navList.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Fecha ao clicar no backdrop
+        navBackdrop.addEventListener('click', closeMenu);
+
+        // Fecha ao clicar em qualquer link do menu
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Fecha ao redimensionar para desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) closeMenu();
+        });
+
+        // ===== FAQ accordion =====
         document.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
@@ -413,7 +463,7 @@
             });
         });
 
-        // Troca de imagem PC / Mobile nos modelos
+        // ===== Troca de imagem PC / Mobile nos modelos =====
         function trocarImagem(tipo, projeto) {
             const img = document.getElementById(`model-img-${projeto}`);
             if (!img) return;
@@ -426,14 +476,16 @@
             }, 300);
         }
 
-        // Navbar efeito ao rolar
+        // ===== Navbar efeito ao rolar (responsivo) =====
         const nav = document.querySelector('nav.topbar');
         window.addEventListener('scroll', () => {
+            const isMobile = window.innerWidth <= 900;
+            const padX = isMobile ? '20px' : '40px';
             if (window.scrollY > 40) {
-                nav.style.padding = '12px 40px';
+                nav.style.padding = `12px ${padX}`;
                 nav.style.background = 'rgba(245, 241, 234, 0.92)';
             } else {
-                nav.style.padding = '18px 40px';
+                nav.style.padding = `${isMobile ? '14px' : '18px'} ${padX}`;
                 nav.style.background = 'rgba(245, 241, 234, 0.75)';
             }
         });
